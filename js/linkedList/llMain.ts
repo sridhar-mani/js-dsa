@@ -76,27 +76,135 @@ export default class linkedList<T>{
         return this.length;
     }
 
-    public delete(value){
+    public delete(value:any):void |null {
         if(!this.head){
             return null
         }
-        let deleteNode = null;
+
+        if(this.head.value===value){
+            this.head = this.head.next;
+            this.length--
+            return
+        }
+
         let curNode = this.head
-        let temp = 1;
 
-        while (temp<(this.length)){
-            if(curNode.next && curNode.next.value!==value){
-            curNode = curNode.next;
-            }else{
 
-                if (curNode.next) deleteNode = curNode.next
-                break
-
+        while(curNode.next){
+            if(curNode.next.value===value){
+                curNode.next=curNode.next.next
+                this.length--
+                return
             }
+            curNode=curNode.next
         }
 
-        if(deleteNode){
-            if(curNode.next) curNode.next = curNode.next?.next;
-        }
+        return null
     }
+    find({value,callback}:{value?:T, callback?:(val:T)=>boolean}):llnode<T> | null{
+        if(!this.head){
+            return null
+        }
+
+        let curNode: llnode<T> |  null = this.head
+
+        while(curNode ){
+            if(callback?.(curNode.value)){
+                return curNode
+            }
+
+            if(value!==undefined && this.compare.equal(curNode.value,value)){
+                return curNode
+            }
+
+            curNode = curNode.next
+        }
+
+        return null
+    }
+
+    deleteTail(){
+
+        if(!this.head) return null
+
+        const deleteTail = this.tail;
+
+        if(this.tail===this.head){
+            this.head=null
+            this.tail=null
+            return deleteTail
+        }
+
+        let curNode = this.head;
+
+        while( curNode.next && curNode?.next!==this.tail){
+            
+                curNode=curNode.next
+            
+        }
+
+        curNode.next=null
+
+        this.tail =curNode
+
+        return deleteTail
+    }
+
+    deleteHead(){
+        if(!this.head) return null
+        const deleteHead = this.head;
+
+        if(this.head===this.tail){
+            this.head=null;
+            this.tail=null
+            return deleteHead
+    }
+
+    if(this.head) this.head = this.head?.next
+    
+    return deleteHead
+}
+
+    fromArray(values:Array<T>){
+        values.forEach(element => this.append(element));
+        return this
+    }
+
+    toArray(){
+        const valuesList:llnode<T>[]=[]
+
+        let curNode = this.head
+        while(curNode){
+            valuesList.push(curNode)
+            curNode=curNode.next
+        }
+
+        return valuesList
+    }
+
+
+    toString(callback){
+        return this.toArray().map((m)=>m.toString(callback)).toString()
+    }
+
+    reverse(){
+        let curNode = this.head;
+        let prevNode:null | llnode<T> = null;
+        let nextNode:null | llnode<T> = null;
+
+        while(curNode){
+            nextNode = curNode.next
+            curNode.next = curNode
+
+            prevNode = curNode
+            curNode = nextNode
+        }
+
+        this.tail=this.head;
+        this.head = prevNode
+
+        return this
+    }
+
+
 }
