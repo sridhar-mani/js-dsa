@@ -43,7 +43,7 @@ export default class linkedList<T>{
         const ind = indexTo <0 ? 0 : indexTo;
         if(indexTo===0){
             this.prepend(value)
-        }else if(indexTo === (this.length-1)){
+        }else if(indexTo === (this.length)){
             this.append(value)
         }else{
             let temp = 0;
@@ -101,7 +101,7 @@ export default class linkedList<T>{
 
         return null
     }
-    find({value,callback}:{value?:T, callback?:(val:T)=>boolean}):llnode<T> | null{
+    public find({value,callback}:{value?:T, callback?:(val:T)=>boolean}):llnode<T> | null{
         if(!this.head){
             return null
         }
@@ -123,7 +123,7 @@ export default class linkedList<T>{
         return null
     }
 
-    deleteTail(){
+    public deleteTail(){
 
         if(!this.head) return null
 
@@ -150,7 +150,7 @@ export default class linkedList<T>{
         return deleteTail
     }
 
-    deleteHead(){
+    public  deleteHead(){
         if(!this.head) return null
         const deleteHead = this.head;
 
@@ -165,12 +165,12 @@ export default class linkedList<T>{
     return deleteHead
 }
 
-    fromArray(values:Array<T>){
+public  fromArray(values:Array<T>){
         values.forEach(element => this.append(element));
         return this
     }
 
-    toArray(){
+    public  toArray(){
         const valuesList:llnode<T>[]=[]
 
         let curNode = this.head
@@ -183,18 +183,18 @@ export default class linkedList<T>{
     }
 
 
-    toString(callback){
+    public   toString(callback:(value:T)=> string){
         return this.toArray().map((m)=>m.toString(callback)).toString()
     }
 
-    reverse(){
+    public  reverse(){
         let curNode = this.head;
         let prevNode:null | llnode<T> = null;
         let nextNode:null | llnode<T> = null;
 
         while(curNode){
             nextNode = curNode.next
-            curNode.next = curNode
+            curNode.next = prevNode
 
             prevNode = curNode
             curNode = nextNode
@@ -206,5 +206,11 @@ export default class linkedList<T>{
         return this
     }
 
+    public  clear(){
+        this.head=null
+        this.tail=null
+        this.length=0
+        return this
+    }
 
 }
