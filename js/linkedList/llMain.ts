@@ -39,7 +39,7 @@ export default class linkedList<T>{
         return this
     }
 
-    public insert(value:T,indexTo):this{
+    public insert(value:T,indexTo:number):this{
         const ind = indexTo <0 ? 0 : indexTo;
         if(indexTo===0){
             this.prepend(value)
