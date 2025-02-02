@@ -1,20 +1,20 @@
 import CompareFunc from '../util/compareFuncs'
-import llnode from './llnode';
+import LLNode from './llnode';
 
-export default class linkedList<T>{
+export default class LinkedList<T>{
     private compare: CompareFunc<T>;
-    private head: llnode<T> | null;
-    private tail: llnode<T> | null; 
+    private head: LLNode<T> | null;
+    private tail: LLNode<T> | null; 
     private length: number;
-    constructor(compareFunc?: CompareFunc<T>){
-        this.compare = compareFunc || new CompareFunc<T> ;
+    constructor(compareFunc?: (a: T, b: T) => number){
+        this.compare = new CompareFunc<T>(compareFunc);
         this.head = null;
         this.tail=null
         this.length = 0;
     }
 
     public append(value: T):this{
-        const newNode = new llnode<T>(value);
+        const newNode = new LLNode<T>(value);
         if(!this.head){
             this.head = this.tail= newNode
 
@@ -29,7 +29,7 @@ export default class linkedList<T>{
     }
 
     public prepend(value: T):this{
-        const newNode = new llnode<T>(value,this.head);
+        const newNode = new LLNode<T>(value,this.head);
         this.head = newNode;
 
         if(!this.tail){
@@ -48,7 +48,7 @@ export default class linkedList<T>{
         }else{
             let temp = 0;
             let currentNode = this.head;
-            const newNode = new llnode(value);
+            const newNode = new LLNode(value);
             while(temp!==indexTo && currentNode){
                 currentNode = currentNode?.next;
                 temp++;
@@ -101,12 +101,12 @@ export default class linkedList<T>{
 
         return null
     }
-    public find({value,callback}:{value?:T, callback?:(val:T)=>boolean}):llnode<T> | null{
+    public find({value,callback}:{value?:T, callback?:(val:T)=>boolean}):LLNode<T> | null{
         if(!this.head){
             return null
         }
 
-        let curNode: llnode<T> |  null = this.head
+        let curNode: LLNode<T> |  null = this.head
 
         while(curNode ){
             if(callback?.(curNode.value)){
@@ -171,7 +171,7 @@ public  fromArray(values:Array<T>){
     }
 
     public  toArray(){
-        const valuesList:llnode<T>[]=[]
+        const valuesList:LLNode<T>[]=[]
 
         let curNode = this.head
         while(curNode){
@@ -189,8 +189,8 @@ public  fromArray(values:Array<T>){
 
     public  reverse(){
         let curNode = this.head;
-        let prevNode:null | llnode<T> = null;
-        let nextNode:null | llnode<T> = null;
+        let prevNode:null | LLNode<T> = null;
+        let nextNode:null | LLNode<T> = null;
 
         while(curNode){
             nextNode = curNode.next

@@ -1,8 +1,8 @@
-export default class llnode<T>{
+export default class LLNode<T>{
     value: T;
-    next: llnode<T> | null;
+    next: LLNode<T> | null;
 
-    constructor(value:T,next: llnode<T>|null=null){
+    constructor(value:T,next: LLNode<T>|null=null){
         this.value=value;
         this.next=next
     }
