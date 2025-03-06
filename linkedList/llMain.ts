@@ -40,11 +40,12 @@ export default class LinkedList<T>{
     }
 
     public insert(value:T,indexTo:number):this{
-        const ind = indexTo <0 ? 0 : indexTo;
         if(indexTo===0){
             this.prepend(value)
-        }else if(indexTo === (this.length)){
+            return this
+        }else if(indexTo > (this.length-1)){
             this.append(value)
+            return this
         }else{
             let temp = 0;
             let currentNode = this.head;
@@ -57,6 +58,7 @@ export default class LinkedList<T>{
             if(currentNode){
                 newNode.next = currentNode.next;
                 currentNode.next = newNode;
+                return this
             }else{
                 if(this.tail){
                     this.tail.next = newNode;
@@ -165,6 +167,16 @@ export default class LinkedList<T>{
     return deleteHead
 }
 
+public getHead(){
+    if(this.head) return this.head
+    return null
+}
+
+public getTail(){
+    if(this.tail) return this.tail
+    return null
+}
+
 public  fromArray(values:Array<T>){
         values.forEach(element => this.append(element));
         return this
@@ -183,7 +195,7 @@ public  fromArray(values:Array<T>){
     }
 
 
-    public   toString(callback:(value:T)=> string){
+    public toString(callback:(value:T)=> string){
         return this.toArray().map((m)=>m.toString(callback)).toString()
     }
 

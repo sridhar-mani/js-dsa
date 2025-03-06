@@ -6,7 +6,7 @@ export default class DoubleLLNode<T>{
     constructor(value:T, next:DoubleLLNode<T>|null=null,prev:DoubleLLNode<T>|null=null){
         this.value= value;
         this.next = next;
-        this.prev=prev
+        this.prev=prev;
     }
 
     toString(callbackFunc:(value:T)=>string):string{

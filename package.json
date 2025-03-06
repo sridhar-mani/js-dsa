@@ -1,7 +1,7 @@
 {
   "name": "@sridhar-mani/dsa-js",
-  "version": "1.0.1",
-  "description": "A full-fledged data structure library with linked list implementation",
+  "version": "1.0.5",
+  "description": "A full-fledged data structure library with linked list and double linked list implementation",
   "main": "dist/linked-list-lib.cjs.js",
   "module": "dist/linked-list-lib.esm.js",
   "umd:main": "dist/linked-list-lib.umd.js",
@@ -14,7 +14,13 @@
     "type": "git",
     "url": "https://github.com/sridhar-mani/js-dsa.git"
   },
-  "keywords": ["data structure", "dsa", "linked-list"],
+  "keywords": [
+    "data structure",
+    "dsa",
+    "linked-list",
+    "doubly-linked-list",
+    "stack"
+  ],
   "author": "sridhar-mani",
   "license": "MIT",
   "devDependencies": {
