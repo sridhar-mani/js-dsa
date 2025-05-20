@@ -5,5 +5,15 @@ import DoubelLinkedList from './doubleLL/dllMain'
 import DoubleLLNode from './doubleLL/dllNode'
 import StackMain from './stack/StackMain';
 import QueueMain from './Queue/QueueMain';
+import HashTBLMain from "./HashTable/HaskTBLMain";
 
-export {LinkedList,LLNode,CompareFunc,DoubelLinkedList,DoubleLLNode,StackMain,QueueMain}
+export {
+  LinkedList,
+  LLNode,
+  CompareFunc,
+  DoubelLinkedList,
+  DoubleLLNode,
+  StackMain,
+  QueueMain,
+  HashTBLMain,
+};
